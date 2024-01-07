@@ -38,6 +38,7 @@ export async function fetchRevenue() {
 export async function fetchLatestInvoices() {
   noStore()
   try {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
     const data = await sql<LatestInvoiceRaw>`
       SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
       FROM invoices
@@ -236,4 +237,13 @@ export async function getUser(email: string) {
     console.error('Failed to fetch user:', error);
     throw new Error('Failed to fetch user.');
   }
+}
+
+export async function loading(){
+    console.log('Fetching  data... from server');
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+    console.log('Data fetch completed after 5 seconds.');
+    const data = "from server"
+    return data
+
 }
